@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Murphy Poly Manufacturing</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(rgba(0, 43, 92, 0.8), rgba(0, 43, 92, 0.8)), url('https://leomarkzintegratedservicesltd.com.ng/storage/service/ClaXoUMrjMx0f9BTCb83FPzAdx1QcKvECqbXUF7G.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 80px 10%;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid #004a99;
+        }
+
+        .stats-bar {
+            background: #002b5c;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 10%;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item h2 { font-size: 2.5rem; margin: 0; color: #63b3ed; }
+
+        @media (max-width: 768px) {
+            .mission-vision { grid-template-columns: 1fr; }
+            .content-section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Simple Nav (Update with your actual nav) -->
+    <header style="padding: 20px 5%; background: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <div class="logo"><strong>MURPHY POLY</strong></div>
+        <nav>
+            <a href="/" style="margin-right: 20px; text-decoration: none; color: #333;">Home</a>
+            <a href="/products" style="margin-right: 20px; text-decoration: none; color: #333;">Products</a>
+            <a href="/contact" style="text-decoration: none; color: #333;">Contact</a>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <h1>Manufacturing Excellence Since 1995</h1>
+        <p>Leading the way in high-performance polymer packaging in Nigeria.</p>
+    </section>
+
+    <section class="content-section">
+        <div style="max-width: 800px; margin: auto; text-align: center;">
+            <h2 style="color: #002b5c;">Our Story</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568;">
+                Founded in the heart of Ogun State, <strong>Murphy Poly</strong> began with a single vision: to bridge the gap between industrial demand and local supply of high-quality packaging materials. 
+                Today, we stand as a cornerstone of the manufacturing sector, providing essential materials for the food, beverage, and retail industries across the nation.
+            </p>
+        </div>
+
+        <div class="mission-vision">
+            <div class="card">
+                <h3>Our Mission</h3>
+                <p>To deliver innovative, durable, and cost-effective packaging solutions that protect products and enhance brand value for our partners.</p>
+            </div>
+            <div class="card">
+                <h3>Our Vision</h3>
+                <p>To be the most trusted name in Nigerian polymer manufacturing, recognized for quality, sustainability, and industrial reliability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Stats Section -->
+    <section class="stats-bar">
+        <div class="stat-item">
+            <h2>99%</h2>
+            <p>Quality Approval</p>
+        </div>
+        <div class="stat-item">
+            <h2>500+</h2>
+            <p>Clients Served</p>
+        </div>
+        <div class="stat-item">
+            <h2>24/7</h2>
+            <p>Production Capacity</p>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: #fff; text-align: center;">
+        <h2 style="color: #002b5c;">Why Work With Us?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 40px;">
+            <div>
+                <h4 style="color: #004a99;">Custom Printing</h4>
+                <p>High-resolution branding for bread wrappers and shopping bags.</p>
+            </div>
+            <div>
+                <h4 style="color: #004a99;">Industrial Strength</h4>
+                <p>Advanced HDPE/LDPE blends designed for maximum durability.</p>
+            </div>
+            <div>
+                <h4 style="color: #004a99;">Fast Turnaround</h4>
+                <p>Streamlined logistics ensuring your production line never stops.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #002b5c; color: white; padding: 60px 5%; text-align: center;">
+        <h3>Ready to start your order?</h3>
+        <p>Contact our sales team today for industrial pricing.</p>
+        <a href="/contact" style="display: inline-block; background: #004a99; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; margin-top: 20px; font-weight: bold;">Get a Quote</a>
+        <p style="margin-top: 40px; font-size: 0.8rem; color: #718096;">&copy; 2026 Murphy Poly. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

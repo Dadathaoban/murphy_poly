@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Murphy Poly</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #002b5c; border-bottom: 2px solid #004a99; padding-bottom: 10px; }
+        
+        /* Form Styling */
+        .add-form { background: #eef4ff; padding: 20px; border-radius: 5px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .add-form input, .add-form textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .add-form button { grid-column: span 2; background: #004a99; color: white; border: none; padding: 12px; cursor: pointer; font-weight: bold; }
+
+        /* Table Styling */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background: #002b5c; color: white; }
+        
+        .action-btns { display: flex; gap: 15px; align-items: center; }
+        .edit-link { color: #004a99; text-decoration: none; font-weight: bold; }
+        .delete-btn { color: #d9534f; background: none; border: none; cursor: pointer; font-weight: bold; padding: 0; }
+        .nav-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #004a99; font-weight: bold; }
+        .logout-btn { float: right; color: #d9534f; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/logout" class="logout-btn">Logout</a>
+    <a href="/" class="nav-link">&larr; Back to Website</a>
+    <h1>Murphy Poly Inventory Manager</h1>
+
+    <h3>Add New Product</h3>
+    <form action="/admin/add" method="POST" class="add-form">
+        <input type="text" name="name" placeholder="Product Name" required>
+        <input type="text" name="category" placeholder="Category (e.g. Packaging)" required>
+        <input type="number" step="0.01" name="price" placeholder="Price (₦)" required>
+        <input type="text" name="image_url" placeholder="Image URL (optional)">
+        <textarea name="specs" placeholder="Specifications (Thickness, Size, etc.)" style="grid-column: span 2;"></textarea>
+        <button type="submit">Add Product to Catalog</button>
+    </form>
+
+    <h3>Current Inventory</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product => { %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td><%= product.category %></td>
+                    <td>₦<%= product.price %></td>
+                    <td>
+                        <div class="action-btns">
+                            <!-- Edit Link -->
+                            <a href="/admin/edit/<%= product.id %>" class="edit-link">Edit</a>
+
+                            <!-- Delete Form -->
+                            <form action="/admin/delete/<%= product.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

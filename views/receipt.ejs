@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Receipt | Murphy Poly</title>
+    <style>
+        body { font-family: sans-serif; padding: 50px; background: #f4f4f4; }
+        .receipt-box { background: white; padding: 40px; max-width: 600px; margin: auto; border-top: 10px solid #002b5c; }
+        .header { text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="receipt-box">
+        <div class="header">
+            <h2>MURPHY POLY</h2>
+            <p>Order Receipt #<%= orderId %></p>
+        </div>
+        <p><strong>Customer:</strong> <%= customerName %></p>
+        <table>
+            <tr><th>Item</th><th>Qty</th><th>Subtotal</th></tr>
+            <% cart.forEach(item => { %>
+                <tr>
+                    <td><%= item.name %></td>
+                    <td><%= item.quantity %></td>
+                    <td>₦<%= item.price * item.quantity %></td>
+                </tr>
+            <% }) %>
+            <tr>
+                <td colspan="2"><strong>Grand Total</strong></td>
+                <td><strong>₦<%= grandTotal %></strong></td>
+            </tr>
+        </table>
+        <div style="margin-top:30px; text-align:center;">
+            <p>A copy has been sent to your email.</p>
+            <button onclick="window.print()" style="background:#002b5c; color:white; padding:10px 20px; border:none; cursor:pointer;">Print Receipt</button>
+            <br><br>
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
