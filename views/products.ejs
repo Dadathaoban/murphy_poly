@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog | Murphy Poly Manufacturing</title>
     <style>
-        :root { --navy: #002b5c; --blue: #004a99; --gold: #ffcc00; --grey: #666; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #333; }
+        :root { --navy: #002b5c; --blue: #004a99; --gold: #ffcc00; --grey: #666; --bg: #f4f7f9; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #333; display: flex; flex-direction: column; min-height: 100vh; }
 
         /* Navigation */
         nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
@@ -15,33 +15,48 @@
 
         /* Header */
         .page-header { background: var(--navy); color: white; padding: 60px 5%; text-align: center; }
-        .page-header h1 { margin: 0; font-size: 2.5rem; }
-        .page-header p { opacity: 0.8; font-size: 1.1rem; margin-top: 10px; }
 
         /* Product Grid */
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .main-container { flex: 1; max-width: 1200px; margin: 40px auto; padding: 0 20px; width: 100%; box-sizing: border-box; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
         /* Product Card */
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; border: 1px solid #eee; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; border: 1px solid #eee; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-5px); }
-        .card-img { width: 100%; height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; font-weight: bold; }
-        .card-content { padding: 25px; }
-        .category { color: var(--blue); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .card h3 { margin: 10px 0; color: var(--navy); font-size: 1.4rem; }
-        .specs { font-size: 0.9rem; color: var(--grey); margin-bottom: 20px; line-height: 1.4; border-left: 3px solid #eee; padding-left: 10px; }
+        .card-img { width: 100%; height: 200px; background: #ddd; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-        .price { font-size: 1.5rem; font-weight: bold; color: #333; }
-        .quote-btn { background: var(--blue); color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.9rem; }
-        .quote-btn:hover { background: var(--navy); }
-        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #002b5c; }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .save-btn { background: #004a99; color: white; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 4px; }
-        .cancel { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; }
-        /* Footer */
-        footer { background: var(--navy); color: white; padding: 40px 5%; margin-top: 60px; text-align: center; }
+        .category { color: var(--blue); font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .card h3 { margin: 10px 0; color: var(--navy); font-size: 1.3rem; }
+        .specs { font-size: 0.85rem; color: var(--grey); margin-bottom: 15px; line-height: 1.4; }
+        
+        .price-row { margin-top: auto; border-top: 1px solid #eee; padding-top: 15px; }
+        .price { font-size: 1.4rem; font-weight: bold; color: var(--navy); display: block; margin-bottom: 10px; }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            display: block;
+            background-color: #25D366;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .whatsapp-btn:hover { background-color: #128C7E; }
+
+        /* Cart Sidebar */
+        #cart-sidebar { position: fixed; right: 0; top: 0; width: 320px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); padding: 25px; display: none; z-index: 2000; overflow-y: auto; }
+        
+        footer { background: var(--navy); color: white; padding: 40px 5%; text-align: center; margin-top: 60px; }
+
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: 1.8rem; }
+            #cart-sidebar { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -51,7 +66,7 @@
         <div>
             <a href="/">Home</a>
             <a href="/products">Products</a>
-            <a href="tel:07033169042" style="background: var(--gold); padding: 8px 15px; border-radius: 4px; color: var(--navy);">Call Support</a>
+            <a href="#" onclick="toggleCart()">🛒 Cart</a>
         </div>
     </nav>
 
@@ -60,18 +75,16 @@
         <p>Premium Polyethylene & Packaging Solutions for Industrial Use</p>
     </header>
 
-    <div class="container">
+    <main class="main-container">
         <div class="product-grid">
-            <!-- This loop pulls data from your Neon Database -->
             <% if (products.length > 0) { %>
                 <% products.forEach(product => { %>
                     <div class="card">
                         <div class="card-img">
-                            <!-- Show image if it exists, otherwise show placeholder -->
                             <% if (product.image_url) { %>
-                                <img src="<%= product.image_url %>" alt="<%= product.name %>" style="width:100%; height:100%; object-fit:cover;">
+                                <img src="<%= product.image_url %>" alt="<%= product.name %>">
                             <% } else { %>
-                                [ IMAGE ]
+                                <div style="display:flex; align-items:center; justify-content:center; height:100%; background:#eee; color:#aaa;">No Image</div>
                             <% } %>
                         </div>
                         
@@ -79,88 +92,47 @@
                             <span class="category"><%= product.category %></span>
                             <h3><%= product.name %></h3>
                             <div class="specs">
-                                <strong>Specifications:</strong><br>
-                                <%= product.specs %>
+                                <strong>Specs:</strong> <%= product.specs %>
                             </div>
-                            <!-- Add this Cart Sidebar to your products.ejs -->
-<div id="cart-sidebar" style="position:fixed; right:0; top:0; width:300px; height:100%; background:#fff; box-shadow:-2px 0 10px rgba(0,0,0,0.1); padding:20px; display:none; z-index:2000;">
-    <h3>Your Order Summary</h3>
-    <div id="cart-items"></div>
-    <hr>
-    <h4>Total: ₦<span id="total-amount">0</span></h4>
-    
-    <form action="/place-order" method="POST">
-        <input type="hidden" name="cartData" id="cartDataInput">
-        <input type="text" name="customerName" placeholder="Full Name" required style="width:100%; margin-bottom:10px;">
-        <input type="email" name="customerEmail" placeholder="Email" required style="width:100%; margin-bottom:10px;">
-        <input type="text" name="customerPhone" placeholder="Phone Number" required style="width:100%; margin-bottom:10px;">
-        <button type="submit" style="width:100%; background:#28a745; color:white; padding:10px; border:none; border-radius:5px; font-weight:bold;">Confirm Order & Get Receipt</button>
-    </form>
-    <button onclick="toggleCart()" style="margin-top:10px; width:100%;">Close</button>
-    <div class="container">
-        <h1>Edit Product</h1>
-        <form action="/admin/edit/<%= product.id %>" method="POST">
-            <label>Product Name</label>
-            <input type="text" name="name" value="<%= product.name %>" required>
-            
-            <label>Category</label>
-            <input type="text" name="category" value="<%= product.category %>" required>
-            
-            <label>Price (₦)</label>
-            <input type="number" step="0.01" name="price" value="<%= product.price %>" required>
-            
-            <label>Image URL</label>
-            <input type="text" name="image_url" value="<%= product.image_url %>">
-            
-            <label>Specifications</label>
-            <textarea name="specs" rows="4"><%= product.specs %></textarea>
-            
-            <button type="submit" class="save-btn">Update Product</button>
-        </form>
-        <a href="/admin" class="cancel">Cancel and Go Back</a>
-    </div>
-</div>
-
-<script>
-    let cart = [];
-    function addToCart(id, name, price) {
-        const exists = cart.find(item => item.id === id);
-        if (exists) { exists.quantity++; } 
-        else { cart.push({ id, name, price, quantity: 1 }); }
-        updateCartUI();
-        document.getElementById('cart-sidebar').style.display = 'block';
-    }
-
-    function updateCartUI() {
-        const container = document.getElementById('cart-items');
-        let total = 0;
-        container.innerHTML = cart.map(item => {
-            total += item.price * item.quantity;
-            return `<p>${item.name} x ${item.quantity} - ₦${item.price * item.quantity}</p>`;
-        }).join('');
-        document.getElementById('total-amount').innerText = total;
-        document.getElementById('cartDataInput').value = JSON.stringify(cart);
-    }
-    function toggleCart() {
-        const s = document.getElementById('cart-sidebar');
-        s.style.display = s.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
 
                             <div class="price-row">
                                 <span class="price">₦<%= product.price %></span>
-                                <a href="https://wa.me/2347033169042" class="quote-btn">Order on WhatsApp</a>
+                                
+                                <% 
+                                    const myNumber = "2347033169042"; 
+                                    const msg = `Hello Murphy Poly, I am interested in ${product.name} (${product.category}). Please send me a quote.`;
+                                    const waUrl = `https://wa.me/${myNumber}?text=${encodeURIComponent(msg)}`;
+                                %>
+                                <a href="<%= waUrl %>" target="_blank" class="whatsapp-btn">
+                                    Inquire on WhatsApp
+                                </a>
+                                <button onclick="addToCart('<%= product.id %>', '<%= product.name %>', <%= product.price %>)" style="width:100%; margin-top:8px; padding:8px; cursor:pointer;">Add to Summary</button>
                             </div>
                         </div>
                     </div>
                 <% }) %>
             <% } else { %>
-                <div style="text-align: center; grid-column: 1 / -1; padding: 50px;">
-                    <h3>No products found in the catalog.</h3>
-                    <p>Check back later or contact us for a custom quote.</p>
+                <div style="text-align: center; grid-column: 1 / -1;">
+                    <h3>Catalog empty. Contact us for custom orders.</h3>
                 </div>
             <% } %>
         </div>
+    </main>
+
+    <!-- Cart Sidebar (Moved OUTSIDE the loop) -->
+    <div id="cart-sidebar">
+        <h3 style="color:var(--navy)">Order Summary</h3>
+        <div id="cart-items" style="margin-bottom:20px;"></div>
+        <hr>
+        <h4>Total: ₦<span id="total-amount">0</span></h4>
+        
+        <form action="/place-order" method="POST">
+            <input type="hidden" name="cartData" id="cartDataInput">
+            <input type="text" name="customerName" placeholder="Full Name" required style="width:100%; padding:10px; margin:5px 0;">
+            <input type="text" name="customerPhone" placeholder="Phone Number" required style="width:100%; padding:10px; margin:5px 0;">
+            <button type="submit" style="width:100%; background:var(--blue); color:white; padding:12px; border:none; border-radius:5px; margin-top:10px; cursor:pointer;">Request Official Receipt</button>
+        </form>
+        <button onclick="toggleCart()" style="margin-top:20px; width:100%; padding:10px; border:1px solid #ddd; background:none; cursor:pointer;">Close</button>
     </div>
 
     <footer>
@@ -168,5 +140,31 @@
         <p style="font-size: 0.8rem; opacity: 0.6;">07033169042 | 08027888867</p>
     </footer>
 
+    <script>
+        let cart = [];
+        function addToCart(id, name, price) {
+            const exists = cart.find(item => item.id === id);
+            if (exists) { exists.quantity++; } 
+            else { cart.push({ id, name, price, quantity: 1 }); }
+            updateCartUI();
+            document.getElementById('cart-sidebar').style.display = 'block';
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                total += item.price * item.quantity;
+                return `<p style="font-size:0.9rem; border-bottom:1px solid #eee; padding:5px 0;"><strong>${item.name}</strong> x ${item.quantity}<br><span style="color:var(--grey)">₦${item.price * item.quantity}</span></p>`;
+            }).join('');
+            document.getElementById('total-amount').innerText = total.toLocaleString();
+            document.getElementById('cartDataInput').value = JSON.stringify(cart);
+        }
+
+        function toggleCart() {
+            const s = document.getElementById('cart-sidebar');
+            s.style.display = s.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
